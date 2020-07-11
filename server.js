@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // Connection to mongoose database
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/fitness-tracker", { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", { useNewUrlParser: true });
 
 // HTML Routs -------------------------------
 //HTML route to app index/homepage
