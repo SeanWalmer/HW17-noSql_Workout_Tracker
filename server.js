@@ -16,6 +16,8 @@ app.use(express.static("public"));
 // Connection to mongoose database
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", { useNewUrlParser: true });
 
+const db = require("./models");
+
 // HTML Routs -------------------------------
 //HTML route to app index/homepage
 app.get("/", (req, res) => {
@@ -35,5 +37,5 @@ app.get("/exercise", (req, res) => {
 
 // server start
 app.listen(PORT, () => {
-    console.log("App running on port " + PORT);
+    console.log("server listening on port " + PORT);
 });
