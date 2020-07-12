@@ -24,7 +24,7 @@ const workoutSchema = new Schema(
                     type: Number,
                     required: "Exercise Duration Required"
                 },
-
+                // nonrequired params
                 weight: Number,
 
                 reps: Number,
@@ -36,6 +36,7 @@ const workoutSchema = new Schema(
             }
         ]
     },
+    // allows for virtuals to be passes when converting to JSON data
     {
         toJSON: {
             virtuals: true
@@ -43,7 +44,7 @@ const workoutSchema = new Schema(
     }
 );
 
-
+// virtual calculates total workout time. Allows for a dynamic property and does not need to be manualy updated every time a new excersise is added to a workout.
 workoutSchema.virtual("totalDuration").get(function () {
     let time = 0;
     for (let i = 0; i < this.exercises.length; i++) {

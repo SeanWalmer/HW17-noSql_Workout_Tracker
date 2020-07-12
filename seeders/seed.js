@@ -6,6 +6,8 @@ mongoose.connect("mongodb://localhost/workout", {
   useFindAndModify: false
 });
 
+
+// elemicated a lot of the starter code I didn't need for testing pourposes
 let workoutSeed = [
   {
     day: new Date().setDate(new Date().getDate()-10),
