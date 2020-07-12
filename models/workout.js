@@ -20,6 +20,10 @@ const workoutSchema = new Schema(
                     trim: true,
                     required: "Exercise Name Required"
                 },
+                duration: {
+                    type: Number,
+                    required: "Exercise Duration Required"
+                },
 
                 weight: Number,
 
@@ -27,12 +31,8 @@ const workoutSchema = new Schema(
 
                 sets: Number,
 
-                distance: Number,
+                distance: Number
 
-                duration: {
-                    type: Number,
-                    required: "Exercise Duration Required"
-                }
             }
         ]
     },
@@ -45,8 +45,11 @@ const workoutSchema = new Schema(
 
 
 workoutSchema.virtual("totalDuration").get(function () {
-    let totalTime = this.exercises[0].duration
-    return totalTime;
+    let time = 0;
+    for (let i = 0; i < this.exercises.length; i++) {
+        time += this.exercises[i].duration;
+    }
+    return time;
 });
 
 const Workout = mongoose.model("Workout", workoutSchema);

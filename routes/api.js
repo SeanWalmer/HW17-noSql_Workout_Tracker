@@ -1,32 +1,34 @@
 const db = require("../models");
+const { update } = require("../models/workout");
 
 module.exports = function (app) {
-    
 
     app.get("/api/workouts", (req, res) => {
-        db.Workout.find({})
-            .then(workout => {
-                res.json(workout);
-            })
-            .catch(err => {
-                res.json(err);
-            });
+        db.Workout.find({}).then(function (workout) {
+            res.json(workout);
+            console.log("\n\nfinding workouts\n\n");
+            console.log(workout);
+        });
     });
-    // app.get("/api/workouts", (req, res) => {
-    //     db.Workout.find({}).then(function(workout){
-    //         res.json(workout);
-    //         console.log(workout);
-    //     });
-    // });
 
-    // app.post("/api/workouts", async (req, res) => {
-    //     try {
-    //         const response = await db.Workout.create({ type: "workout" })
-    //         res.json(response);
-    //     }
-    //     catch (err) {
-    //         console.log("Workout not created: ", err)
-    //     };
-    // });
+    app.post("/api/workouts", (req, res) => {
+        db.Workout.create(req.body, (error, data) => {
+            res.send(data);
+        });
+    });
 
+    app.put("/api/workouts/:id", (req, res) => {
+        db.Workout.findOneAndUpdate({
+            _id: req.params.id
+        }, {
+            $push: {
+                exercises: req.body
+            }
+        }, {
+            new: true,
+            omitUndefined: true
+        }).then(updated => {
+            res.json(updated);
+        });
+    });
 };
