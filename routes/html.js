@@ -2,9 +2,9 @@ const path = require("path");
 
 module.exports = function (app) {
     //HTML route to app index/homepage
-    app.get("/", (req, res) => {
-        res.sendFile(path.join(__dirname + "../public/index.html"));
-    });
+    // app.get("/", (req, res) => {
+    //     res.sendFile(path.join(__dirname + "../public/index.html"));
+    // });
 
     //HTML route to stats page
     app.get("/stats", (req, res) => {
