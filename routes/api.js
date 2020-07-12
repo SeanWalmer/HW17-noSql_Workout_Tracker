@@ -1,5 +1,4 @@
 const db = require("../models");
-// const { update } = require("../models/workout");
 
 module.exports = function (app) {
     // grabs all workouts that are then handled throughout the app depending on need
